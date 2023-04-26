@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class snakeBehaviour : MonoBehaviour
 {
-    //behaviours = movement,size modification
+    //behaviours = movement,size modification, death
 
-    public GameObject snakeHead;
+    
     public Transform snakeBodyPart;
+    public GameObject fullSnake;
     
     Rigidbody2D rb;
     Vector2 direction = Vector2.right;
@@ -19,13 +20,12 @@ public class snakeBehaviour : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         totalSnake = new List<Transform>();
-        totalSnake.Add(snakeHead.transform);
+        totalSnake.Add(this.transform);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(totalSnake.Count);
 
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -73,7 +73,14 @@ public class snakeBehaviour : MonoBehaviour
             totalSnake[i].transform.position = totalSnake[i - 1].transform.position;
         }
 
-        snakeHead.transform.position = new Vector2((snakeHead.transform.position.x)+ 
-            direction.x ,(snakeHead.transform.position.y)+ direction.y);
+        transform.position = new Vector2((transform.position.x)+ 
+            direction.x ,(transform.position.y)+ direction.y);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Game Over");
+        Destroy(fullSnake);
+    }
+    
 }
