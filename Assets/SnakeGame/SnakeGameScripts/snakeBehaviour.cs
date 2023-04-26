@@ -79,8 +79,15 @@ public class snakeBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Game Over");
-        Destroy(fullSnake);
+        
+        if(collision.tag == "SnakeBody" || collision.tag == "Wall")
+        {
+            Debug.Log("Game Over");
+            Destroy(fullSnake);
+        }
+
+        
+
     }
     
 }
