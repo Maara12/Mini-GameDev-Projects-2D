@@ -146,13 +146,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409315102}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.07, y: 0, z: 0}
   m_LocalScale: {x: 8, y: 1, z: 1}
-  m_Children:
-  - {fileID: 788270881}
+  m_Children: []
   m_Father: {fileID: 652719233}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -246,6 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652719233}
+  - component: {fileID: 652719234}
   m_Layer: 0
   m_Name: Snake
   m_TagString: Untagged
@@ -261,14 +261,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652719232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.484, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
-  - {fileID: 926922003}
   - {fileID: 409315103}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &652719234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652719232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e715cdacd0e5e5b45bd44083907c20de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeSpeed: 0.2
+  snakeHead: {fileID: 926922002}
+  snakeBody: {fileID: 788270880}
 --- !u!1 &788270880
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,11 +307,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788270880}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.2450004, y: 0, z: 0}
+  m_LocalScale: {x: 7.5, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 409315103}
+  m_Father: {fileID: 926922003}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &788270882
@@ -341,7 +355,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.057271298, g: 0.808698, b: 0.9339623, a: 1}
+  m_Color: {r: 0.36245105, g: 0.41562036, b: 0.4245283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -361,6 +375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926922003}
   - component: {fileID: 926922004}
+  - component: {fileID: 926922005}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -376,11 +391,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926922002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 652719233}
-  m_RootOrder: 0
+  m_LocalPosition: {x: 0.874, y: 0.484, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children:
+  - {fileID: 788270881}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &926922004
 SpriteRenderer:
@@ -423,7 +439,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.5330188, g: 1, b: 0.9627313, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.10700178, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -433,3 +449,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &926922005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926922002}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e715cdacd0e5e5b45bd44083907c20de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snakeSpeed: 0.2
+  snakeHead: {fileID: 0}
+  snakeBody: {fileID: 0}
