@@ -48,10 +48,6 @@ public class snakeBehaviour : MonoBehaviour
             direction = Vector2.down;
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            ExtendBody();
-        }
     }
 
     private void ExtendBody()
@@ -68,13 +64,18 @@ public class snakeBehaviour : MonoBehaviour
 
     private void Move()
     {
+        FollowThefrontSnakeBodyParts();
+
+        transform.position = new Vector2((transform.position.x) +
+            direction.x, (transform.position.y) + direction.y);
+    }
+
+    private void FollowThefrontSnakeBodyParts()
+    {
         for (int i = totalSnake.Count - 1; i > 0; i--)
         {
             totalSnake[i].transform.position = totalSnake[i - 1].transform.position;
         }
-
-        transform.position = new Vector2((transform.position.x)+ 
-            direction.x ,(transform.position.y)+ direction.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -86,7 +87,10 @@ public class snakeBehaviour : MonoBehaviour
             Destroy(fullSnake);
         }
 
-        
+        if(collision.tag == "Food")
+        {
+            ExtendBody();
+        }
 
     }
     
