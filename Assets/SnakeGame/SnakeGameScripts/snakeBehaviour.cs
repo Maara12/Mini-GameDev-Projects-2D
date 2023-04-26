@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,54 +6,58 @@ using UnityEngine;
 public class snakeBehaviour : MonoBehaviour
 {
     //behaviours = movement,size modification
-    public float snakeSpeed = 0.5f;
+
+    public float snakeSpeed = 2f;
     public GameObject snakeHead;
-    public GameObject snakeBody;
+    //public GameObject snakeBody;
+    Rigidbody2D rb;
+    Vector2 direction = Vector2.right;
+    List<GameObject> totalSnake;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        totalSnake = new List<GameObject>();
+        totalSnake.Add(snakeHead);
     }
 
     // Update is called once per frame
     void Update()
     {
-     
-        snakeHead.transform.Translate(Vector2.right * snakeSpeed * Time.deltaTime, Space.Self);
-        //snakeHead.transform.position = transform.forward;
-
-        Debug.Log(transform.localEulerAngles.z);
 
         if (Input.GetKeyDown(KeyCode.D))
         {
             Debug.Log("Hinput = 1");
-            snakeHead.transform.localRotation = Quaternion.Euler(0, 0, snakeHead.transform.localEulerAngles.z - 90f);
+            direction = Vector2.right;
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.A))
         {
             Debug.Log("Hinput = -1");
-            snakeHead.transform.localRotation = Quaternion.Euler(0, 0, snakeHead.transform.localEulerAngles.z + 90f);
+            direction = Vector2.left;
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(KeyCode.W))
         {
             Debug.Log("Vinput = 1");
-            snakeHead.transform.localRotation = Quaternion.Euler(0, 0, transform.localEulerAngles.z - 90f);
+            direction = Vector2.up;
         }
-
-        if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("Hinput = -1");
-            snakeHead.transform.localRotation = Quaternion.Euler(0, 0, transform.localEulerAngles.z + 90f);
-        }*/
+            Debug.Log("Vinput = -1");
+            direction = Vector2.down;
+        }
 
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        //snakeBody.transform.position = snakeHead.transform.position; 
+        Move();
+    }
+
+    private void Move()
+    {
+        snakeHead.transform.position = new Vector2((snakeHead.transform.position.x + 
+            direction.x * snakeSpeed * Time.fixedDeltaTime)
+            ,(snakeHead.transform.position.y+ direction.y* snakeSpeed * Time.fixedDeltaTime));
     }
 }
