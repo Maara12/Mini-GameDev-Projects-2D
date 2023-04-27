@@ -2,25 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 
 public class snakeBehaviour : MonoBehaviour
 {
     //behaviours = movement,size modification, death
 
+    public Text scoreText;
+    public Text finalScoreText;
+    public GameObject replayButton;
     
     public Transform snakeBodyPart;
     public GameObject fullSnake;
     
+    private int score = 0;
+
     Rigidbody2D rb;
     Vector2 direction = Vector2.right;
-    List<Transform> totalSnake;
+    List<Transform> totalSnake = new List<Transform>();
 
     // Start is called before the first frame update
     void Start()
     {
+        Reset();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        totalSnake = new List<Transform>();
-        totalSnake.Add(this.transform);
+        scoreText.text = score.ToString();
     }
 
     // Update is called once per frame
@@ -84,14 +92,41 @@ public class snakeBehaviour : MonoBehaviour
         if(collision.tag == "SnakeBody" || collision.tag == "Wall")
         {
             Debug.Log("Game Over");
-            Destroy(fullSnake);
+            fullSnake.SetActive(false);
+            replayButton.SetActive(true);
         }
 
         if(collision.tag == "Food")
         {
+            score++;
+            scoreText.text = score.ToString();
             ExtendBody();
         }
 
     }
-    
+
+    private void Reset()
+    {
+        for(int i = 1; i<totalSnake.Count; i++)
+        {
+            Destroy(totalSnake[i].gameObject);
+        }
+        totalSnake.Clear();
+
+        fullSnake.SetActive(true);
+        transform.position = Vector3.zero;
+
+        totalSnake.Add(this.transform);
+
+        score = 0;
+        scoreText.text = score.ToString();
+        replayButton.SetActive(false);
+
+    }
+
+    public void OnReplayButtonClicked()
+    {
+        Reset();
+    }
+
 }
