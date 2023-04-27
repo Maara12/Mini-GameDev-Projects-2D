@@ -11,6 +11,7 @@ public class snakeBehaviour : MonoBehaviour
     //behaviours = movement,size modification, death
 
     public Text scoreText;
+    public GameObject finalScoreDisplay;
     public Text finalScoreText;
     public GameObject replayButton;
     
@@ -92,8 +93,10 @@ public class snakeBehaviour : MonoBehaviour
         if(collision.tag == "SnakeBody" || collision.tag == "Wall")
         {
             Debug.Log("Game Over");
+            finalScoreText.text = score.ToString();
             fullSnake.SetActive(false);
             replayButton.SetActive(true);
+            finalScoreDisplay.SetActive(true);
         }
 
         if(collision.tag == "Food")
@@ -121,6 +124,7 @@ public class snakeBehaviour : MonoBehaviour
         score = 0;
         scoreText.text = score.ToString();
         replayButton.SetActive(false);
+        finalScoreDisplay.SetActive(false);
 
     }
 
