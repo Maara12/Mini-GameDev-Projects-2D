@@ -11,6 +11,8 @@ public class snakeBehaviour : MonoBehaviour
     //behaviours = movement,size modification, death
 
     public Text scoreText;
+    public Text highScoreText;
+    public GameObject highScoreScoreDisplay;
     public GameObject finalScoreDisplay;
     public Text finalScoreText;
     public GameObject replayButton;
@@ -19,6 +21,7 @@ public class snakeBehaviour : MonoBehaviour
     public GameObject fullSnake;
     
     private int score = 0;
+    
 
     Rigidbody2D rb;
     Vector2 direction = Vector2.right;
@@ -30,6 +33,8 @@ public class snakeBehaviour : MonoBehaviour
         Reset();
         rb = gameObject.GetComponent<Rigidbody2D>();
         scoreText.text = score.ToString();
+
+        PlayerPrefs.SetInt("HighScore", 0);
     }
 
     // Update is called once per frame
@@ -93,19 +98,43 @@ public class snakeBehaviour : MonoBehaviour
         if(collision.tag == "SnakeBody" || collision.tag == "Wall")
         {
             Debug.Log("Game Over");
-            finalScoreText.text = score.ToString();
+
             fullSnake.SetActive(false);
             replayButton.SetActive(true);
-            finalScoreDisplay.SetActive(true);
+
+            SetAndDisplayHighScore();
+
+            DisplayScore();
         }
 
-        if(collision.tag == "Food")
+        if (collision.tag == "Food")
         {
-            score++;
-            scoreText.text = score.ToString();
+            SetScore();
             ExtendBody();
         }
 
+    }
+
+    private void SetAndDisplayHighScore()
+    {
+        if (PlayerPrefs.GetInt("HighScore") < score)
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.text = score.ToString();
+        }
+        highScoreScoreDisplay.SetActive(true);
+    }
+
+    private void DisplayScore()
+    {
+        finalScoreText.text = score.ToString();
+        finalScoreDisplay.SetActive(true);
+    }
+
+    private void SetScore()
+    {
+        score++;
+        scoreText.text = score.ToString();
     }
 
     private void Reset()
@@ -125,6 +154,7 @@ public class snakeBehaviour : MonoBehaviour
         scoreText.text = score.ToString();
         replayButton.SetActive(false);
         finalScoreDisplay.SetActive(false);
+        highScoreScoreDisplay.SetActive(false);
 
     }
 
